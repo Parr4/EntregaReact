@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  width: 100vw;
+  overflow: hidden;
+  justify-content: center;
+  position: sticky;
+  top: 0;
+  right: 0;
+  background-color: orange;
+  border-bottom: 5px solid black ;
+}
+
+
+footer{
+  width: 100vw;
+  justify-content: center;
+
+  background-color: orange;
+  border-top: 5px solid black ;
+  color: black;
+}
+
+.linea {
+  display: flex;
+  top: 0;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 20px;
+}
+
+.navBarBot {
+  display: inline-flex;
+  justify-content: space-between;
+}
+
+/* .CarritoWidget{
+  justify-self: end;
+
+}  */
+.cantidad {
+  display: inline;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+}
+
+.cantidad {
+  background-color: limegreen;
+  padding: 5px;
+  border-radius: 25px;
+}
+
+body{
+  justify-content: center;
+  width: 100vw;
+  overflow-x: hidden;
+  color: white;
+}
+
+h1{
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom:50px ;
+  width: 100vw;
+}
+
+h2{
+justify-content: center;
+text-align: left;
+padding: 0px 10% 0px 10%;
+}
+label{
+  justify-content: center;
+  text-align: left;
+  padding: 0px 10% 0px 10%;
+
+}
+
+.relleno{
+  padding-top: 700px;
+}
+.itemList{
+  margin: 0;
+  padding: 0;
+  justify-items: center;
+  width: 100vw;
+  overflow:hidden;
+
+}
+
+.container{
+  margin: 0;
+  padding: 0;
+  place-items: center;
+
+}
+.row{
+  display: flex;
+  justify-content: center;
+}
+
+.card{
+  margin: 10px;
+}
