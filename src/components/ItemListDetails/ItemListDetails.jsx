@@ -5,17 +5,19 @@ import { Link, useParams } from "react-router-dom"
 import AddCartButton from '../AddCartButton/AddCartButton'
 import BotonCant from "../BotonCant/BotonCant"
 import CatalogImport from '../FetchCatalog/FetchCatalog'
+import { useCatalog } from '../FetchCatalog/FetchUse'
 
 const ItemListDetails = () => {
     const [product, setProduct] = useState({})
-    const [loading, setLoading] = useState(true)
+    // const [loading, setLoading] = useState(true)
 
     
-
+    const {products, error, loading} = useCatalog()
     const { franqId ,productId } = useParams()
     console.log('Id producto: ', franqId, productId)
 
     console.log("catalogogog", CatalogImport)
+
 
 
     // usar el useEffect en vez del useState, tira bucle xq esta 2 veces llamado
@@ -53,16 +55,16 @@ const ItemListDetails = () => {
           :
             <div className="card w-100 mt-5" >
                 <div className="card-header">
-                    {`${product[0].franquicia} ${product[0].tomo} / ${product[0].editorial}`}
+                    {`${products[0].franquicia} ${products[0].tomo} / ${products[0].editorial}`}
                 </div>
                 <div className="card-body">
-                    <img src={`/src/assets/img/${product[0].franquicia}/${product[0].tomo}.jpg`} alt='' className='w-50' />
-                    {product[0].precio}
-                    <p>Stock disponible: {product[0].stock}</p>
+                    <img src={`/src/assets/img/${products[0].franquicia}/${products[0].tomo}.jpg`} alt='' className='w-50' />
+                    {products[0].precio}
+                    <p>Stock disponible: {products[0].stock}</p>
                 </div>
                 <div className="card-footer">
                     <AddCartButton/>
-                    <BotonCant product={product}/>
+                    <BotonCant product={products}/>
                 </div>
             </div>}
         </section>

@@ -110,24 +110,24 @@ const ItemListContainer = ({ greeting }) => {
         {loading ?
           <h2>Cargando Productos!</h2>
           :
-          products.map(product => <div
+          products.map(products => <div
             style={{ justifyContent: 'center' }}
             className='card col-lg-2 col-md-4 col-sm-6 col-6'
-            key={`${product.id} + . + ${product.franqId}`}
+            key={`${products.id} + . + ${products.franqId}`}
           >
             <Card >
-              <Card.Img variant="top" src={`/src/assets/img/${product.franquicia}/${product.tomo}.jpg`} />
-              <Card.Header as="p">{product.editorial}</Card.Header>
+              <Card.Img variant="top" src={`/src/assets/img/${products.franquicia}/${products.tomo}.jpg`} />
+              <Card.Header as="p">{products.editorial}</Card.Header>
               <Card.Body>
 
-                <Card.Title>{product.franquicia} {product.tomo}</Card.Title>
+                <Card.Title>{products.franquicia} {products.tomo}</Card.Title>
                 <Card.Text>
-                  Precio: {product.precio}
+                  Precio: {products.precio}
                   <br />
-                  Stock disponible: {product.stock}
+                  Stock disponible: {products.stock}
                 </Card.Text>
-                <Link to={`/catalog/${product.franqId}/${product.id}`}><Button variant="primary">Ver Producto</Button></Link>
-                <AddCartButton productPassed={product}/>
+                <Link to={`/catalog/${products.franqId}/${products.id}`}><Button variant="primary">Ver Producto</Button></Link>
+                <AddCartButton productPassed={products}/>
               </Card.Body>
             </Card>
 
