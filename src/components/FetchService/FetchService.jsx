@@ -5,10 +5,7 @@ import { InitFirestoreApp } from "../../firestore/config"
 import { useCatalog } from '../FetchCatalog/FetchUse'
 
 
-export const ExportData = () => {
-    const []
 
-}
 
 const { franqId } = useParams()
 

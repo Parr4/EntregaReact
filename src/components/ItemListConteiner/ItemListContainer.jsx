@@ -7,9 +7,11 @@ import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, updateDo
 // import FetchCatalog from '../FetchCatalog/FetchCatalog'
 import ItemListDetails from '../ItemListDetails/ItemListDetails'
 import { Button, Card } from 'react-bootstrap'
-import AddCartButton from '../AddCartButton/AddCartButton';
+
 // import CatalogImport from '../FetchCatalog/FetchCatalog';
 import { useCatalog } from '../FetchCatalog/FetchUse';
+import BotonCant from '../BotonCant/BotonCant';
+import { ItemListSelected } from '../ItemListSelected/ItemListSelected';
 // import { gFetch } from '../../helpers/gFetch'
 const products = []
 
@@ -126,8 +128,8 @@ const ItemListContainer = ({ greeting }) => {
                   <br />
                   Stock disponible: {products.stock}
                 </Card.Text>
-                <Link to={`/catalog/${products.franqId}/${products.id}`}><Button variant="primary">Ver Producto</Button></Link>
-                <AddCartButton productPassed={products}/>
+                <Link to={`/catalog/${products.franqId}/${products.id}`}><ItemListSelected products={'hola'}/><Button variant="primary">Ver Producto</Button></Link>
+                <BotonCant products={products}/>
               </Card.Body>
             </Card>
 

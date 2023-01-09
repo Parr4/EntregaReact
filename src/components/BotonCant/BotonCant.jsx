@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { CarritoWidget } from "../CarritoWidget/CarritoWidget";
+import { Cart } from "../Cart/Cart";
 
-const BotonCant = ({ product }) => {
+const BotonCant = ({ products }) => {
     const [cantidad, setCantidad] = useState(1)
 
+
     function sumar(event) {
-        if (cantidad >= product.stock) {
+        if (cantidad >= products.stock) {
             event.preventDefault()
         }
         else{
@@ -20,6 +22,13 @@ const BotonCant = ({ product }) => {
         else{
         setCantidad(cantidad-1)
         console.log(cantidad)}
+        console.log({products})
+    }
+    function AddToCart(){
+        //  <Cart addProduct={products}/>
+        Cart(products)
+        // <Cart addProduct={products}/>
+        console.log("añadido")
     }
     // function agregaCantidad {
     //     <CarritoWidget ={'{cantidad}'}/>
@@ -28,7 +37,7 @@ const BotonCant = ({ product }) => {
     // <CarritoWidget cantidad={cantidad}/>
 
     
-    console.log('Estai viendo esta wea', product)
+    console.log('Estai viendo esta wea',products, products.stock)
     return (
         <div>
             <div className=" btn btn-warning">
@@ -39,7 +48,7 @@ const BotonCant = ({ product }) => {
                 </div>
                 <button id="addButton" className=" btn btn-danger" onClick={sumar}>+</button>
             </div>
-            <button> Añadir al carrito</button>
+            <button onClick={AddToCart}> Añadir al carrito</button>
 
 
 

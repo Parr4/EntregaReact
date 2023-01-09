@@ -2,21 +2,22 @@ import {collection, doc, getDoc, getDocs, getFirestore, query, where} from 'fire
 import { useEffect } from "react"
 import { useState } from "react"
 import { Link, useParams } from "react-router-dom"
-import AddCartButton from '../AddCartButton/AddCartButton'
 import BotonCant from "../BotonCant/BotonCant"
+import { Cart } from '../Cart/Cart'
 import CatalogImport from '../FetchCatalog/FetchCatalog'
 import { useCatalog } from '../FetchCatalog/FetchUse'
+import { ItemListSelected } from '../ItemListSelected/ItemListSelected'
 
 const ItemListDetails = () => {
-    const [product, setProduct] = useState({})
+    // const [product, setProduct] = useState({})
     // const [loading, setLoading] = useState(true)
 
-    
-    const {products, error, loading} = useCatalog()
+    // const {products} = ItemListSelected()
+    const { products, error, loading} = useCatalog()
     const { franqId ,productId } = useParams()
     console.log('Id producto: ', franqId, productId)
 
-    console.log("catalogogog", CatalogImport)
+    // console.log("catalogogog", CatalogImport)
 
 
 
@@ -48,25 +49,31 @@ const ItemListDetails = () => {
     // console.log('product', product[0])
 
     return (
-        // <Link to={`catalog/detail/${product.franqId}.${product.id}`}>
+        // <Link to={`catalog/detail/${products.franqId}/${products.id}`}>
         <section>
             {loading ?
           <h2>Cargando Productos!</h2>
           :
-            <div className="card w-100 mt-5" >
+          products.map(products => <section
+            style={{ justifyContent: 'center' }}
+            className='col-lg-6 col-md-4 col-sm-6 col-6'
+            key={`${products.id} + . + ${products.franqId}`}
+          >
+            <div className="card w-100 mt-5" />
                 <div className="card-header">
-                    {`${products[0].franquicia} ${products[0].tomo} / ${products[0].editorial}`}
+                    {`${products.franquicia} ${products.tomo} / ${products.editorial}`}
                 </div>
                 <div className="card-body">
-                    <img src={`/src/assets/img/${products[0].franquicia}/${products[0].tomo}.jpg`} alt='' className='w-50' />
-                    {products[0].precio}
-                    <p>Stock disponible: {products[0].stock}</p>
+                    <img src={`/src/assets/img/${products.franquicia}/${products.tomo}.jpg`} alt='' className='w-50' />
+                    {products.precio}
+                    <p>Stock disponible: {products.stock}</p>
                 </div>
                 <div className="card-footer">
-                    <AddCartButton/>
-                    <BotonCant product={products}/>
+                    <BotonCant products={products}/>
                 </div>
-            </div>}
+                <Cart/>
+                </section>)
+            }
         </section>
         // </Link>
     )
