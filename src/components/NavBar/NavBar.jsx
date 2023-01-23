@@ -23,6 +23,7 @@ export default function NavBar() {
                         <Nav className="me-auto">
                             <Link className="btn" to="/">Inicio</Link>
                             <Link className="btn" to="/catalog">Catalogo</Link>
+                            <Link className="btn" to="/cart">Cart</Link>
                             <NavDropdown title="Redes Sociales" id="basic-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Instagram</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">

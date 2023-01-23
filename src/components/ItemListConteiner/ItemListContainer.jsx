@@ -39,6 +39,8 @@ const ItemListContainer = ({ greeting }) => {
   const {products, error, loading} = useCatalog()
   console.log(products)
 
+
+
   // const [products, setProduct] = useState([])
   // const [loading, setLoading] = useState(true)
 
@@ -129,7 +131,7 @@ const ItemListContainer = ({ greeting }) => {
                   Stock disponible: {products.stock}
                 </Card.Text>
                 <Link to={`/catalog/${products.franqId}/${products.id}`}><ItemListSelected products={'hola'}/><Button variant="primary">Ver Producto</Button></Link>
-                <BotonCant products={products}/>
+                {/* <BotonCant products={products}/> */}
               </Card.Body>
             </Card>
 

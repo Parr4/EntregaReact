@@ -9,9 +9,10 @@ export const CartContextProvider = ({ children }) => {
     const [cartList, setCartList] = useState([])
     // modificacion del cartlist 
 
-    const AddToCart = (product) => {
+    const addToCart = (product) => {
+        console.log(product)
         // comprobar si esta el producto
-        const idSearch = cartlist.findIndex(prod => prod.id === product.id)
+        const idx = cartList.findIndex(prod => prod.id === product.id)
         // si no esta = -1
 
         if (idx !== -1) {
@@ -22,11 +23,12 @@ export const CartContextProvider = ({ children }) => {
         } else {
             setCartList([...cartList, product]) // push
         }
+        // console.log(cartList)
 
     }
 
     // precio total ----- en caso de falla cambiar el nombre de product para que no repita en el codigoo
-    const finalPrice = () => cartList.reduce((count, product) => count += (product.price * product.quant), 0 )
+    const totalPrice = () => cartList.reduce((count, product) => count += (product.price * product.quant), 0 )
 
     // ccantidad total 
     const totalQuant = () => cartList.reduce((contador, producto) => count += producto.quant , 0)
@@ -47,13 +49,12 @@ export const CartContextProvider = ({ children }) => {
     return ( 
         <CartContext.Provider value = {{
             cartList,
-            AddToCart,
+            addToCart,
             clearCart,
             totalPrice,
             totalQuant,
             deleteItem
-        }}
-        >
+        }}>
             {children}
             </CartContext.Provider>
     )

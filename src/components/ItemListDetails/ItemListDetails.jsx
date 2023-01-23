@@ -2,10 +2,12 @@ import {collection, doc, getDoc, getDocs, getFirestore, query, where} from 'fire
 import { useEffect } from "react"
 import { useState } from "react"
 import { Link, useParams } from "react-router-dom"
+import { CartContextProvider, useCartContext } from '../../context/CartContext'
 import BotonCant from "../BotonCant/BotonCant"
 import { Cart } from '../Cart/Cart'
 import CatalogImport from '../FetchCatalog/FetchCatalog'
 import { useCatalog } from '../FetchCatalog/FetchUse'
+import ItemCount from '../ItemCount/ItemCount'
 import { ItemListSelected } from '../ItemListSelected/ItemListSelected'
 
 const ItemListDetails = () => {
@@ -17,6 +19,19 @@ const ItemListDetails = () => {
     const { franqId ,productId } = useParams()
     console.log('Id producto: ', franqId, productId)
 
+
+    const [isCant, setIsCant ] = useState(false)
+
+    const {  addToCart } = useCartContext()
+
+
+    const onAdd = (cant) => {
+        console.log('la cantidad seleccionada es: ',cant)
+        addToCart( { ...products, cant } )
+        setIsCant(true)
+    }
+
+ 
     // console.log("catalogogog", CatalogImport)
 
 
@@ -69,9 +84,33 @@ const ItemListDetails = () => {
                     <p>Stock disponible: {products.stock}</p>
                 </div>
                 <div className="card-footer">
-                    <BotonCant products={products}/>
+                    {/* <BotonCant products={products}/> */}
                 </div>
-                <Cart/>
+                <div className="col">
+                    {isCant ?
+                    
+                        <>
+                            <Link to="/cart">
+                                <button className='btn btn-outline-primary'>Ir al carrtio</button>
+
+                            </Link>
+                            <Link to="/">
+                                <button className='btn btn-outline-success'>Seguir comprando </button>
+                            </Link>
+                        </>
+                    
+                    :
+                        <ItemCount 
+                            stock={products.stock} 
+                            initial={1} 
+                            onAdd={onAdd} 
+                        />
+                    
+                    }
+
+                </div>
+
+
                 </section>)
             }
         </section>
