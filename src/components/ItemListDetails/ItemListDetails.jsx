@@ -27,7 +27,7 @@ const ItemListDetails = () => {
 
     const onAdd = (cant) => {
         console.log('la cantidad seleccionada es: ',cant)
-        addToCart( { ...products, cant } )
+        addToCart( {...products[0], cant } )
         setIsCant(true)
     }
 
@@ -104,6 +104,7 @@ const ItemListDetails = () => {
                             stock={products.stock} 
                             initial={1} 
                             onAdd={onAdd} 
+
                         />
                     
                     }

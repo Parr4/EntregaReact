@@ -81,13 +81,13 @@ const CartContainer = () => {
     <div>
       { cartList.length !== 0 ? 
       <>
-        {cartList.map(prod => <div key={prod[0].id}>
+        {cartList.map(prod => <div key={prod.id}>
                                 <div className="w-50">
                                 <img src={prod.foto} alt="" className='w-25' /> 
                                 
 
                                 </div>
-                              Nombre: { prod[0].franquicia} {prod[0].tomo} - {prod[0].editorial}- precio: {prod.price} - cantidad: {prod.cant}
+                              Nombre: { prod.franqId} { prod.franquicia} {prod.tomo} - {prod.editorial}- precio: {prod.price} - cantidad: {prod.cant}
                                   <button onClick={() => deleteItem(prod.id)} className="btn btn-danger"> X </button>
                                 </div>
                                 ) 

@@ -10,12 +10,15 @@ export const CartContextProvider = ({ children }) => {
     // modificacion del cartlist 
 
     const addToCart = (product) => {
-        console.log(product)
+        console.log("addtocart: ",product)
         // comprobar si esta el producto
-        const idx = cartList.findIndex(prod => prod.id === product.id)
+
+        const idx = cartList.findIndex(prod => `${prod.id}.${prod.franqId}` == `${product.franqId}.${product.id}`)
+        console.log("idx", idx)
         // si no esta = -1
 
         if (idx !== -1) {
+            // console.log(prod.id)
 
             // cartList[idx].cant = cartList[idx].cant + product.cant
             cartList[idx].cant += product.cant
@@ -31,7 +34,7 @@ export const CartContextProvider = ({ children }) => {
     const totalPrice = () => cartList.reduce((count, product) => count += (product.price * product.quant), 0 )
 
     // ccantidad total 
-    const totalQuant = () => cartList.reduce((contador, producto) => count += producto.quant , 0)
+    const totalQuant = () => cartList.reduce((count, product) => count += product.quant , 0)
 
     // vaciar carrito 
     const clearCart = () => {
