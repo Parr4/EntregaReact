@@ -13,7 +13,7 @@ export const CartContextProvider = ({ children }) => {
         console.log("addtocart: ",product)
         // comprobar si esta el producto
 
-        const idx = cartList.findIndex(prod => `${prod.id}.${prod.franqId}` == `${product.franqId}.${product.id}`)
+        const idx = cartList.findIndex(prod => `${prod.franqId}.${prod.id}` == `${product.franqId}.${product.id}`)
         console.log("idx", idx)
         // si no esta = -1
 
@@ -21,7 +21,7 @@ export const CartContextProvider = ({ children }) => {
             // console.log(prod.id)
 
             // cartList[idx].cant = cartList[idx].cant + product.cant
-            cartList[idx].cant += product.cant
+            cartList[idx].count += product.count
             setCartList([...cartList])
         } else {
             setCartList([...cartList, product]) // push
@@ -31,18 +31,19 @@ export const CartContextProvider = ({ children }) => {
     }
 
     // precio total ----- en caso de falla cambiar el nombre de product para que no repita en el codigoo
-    const totalPrice = () => cartList.reduce((count, product) => count += (product.price * product.quant), 0 )
+    const totalPrice = () => cartList.reduce((count, product) => count += (product.precio * product.count), 0 )
 
     // ccantidad total 
-    const totalQuant = () => cartList.reduce((count, product) => count += product.quant , 0)
+    const totalQuant = () => cartList.reduce((count, product) => count += product.count , 0)
 
     // vaciar carrito 
     const clearCart = () => {
         setCartList([])
     }
 
-    const deleteItem = (id) => {
-        setCartList (  setCartList.filter(prod = prod.id !== id) )
+    const deleteItem = (franqId ,id) => {
+        console.log(franqId, id)
+        setCartList( cartList.filter(prod => `${prod.franqId}.${prod.id}` !== `${franqId}.${id}` ) )
     }
     // inInCart
     // eliminar por item

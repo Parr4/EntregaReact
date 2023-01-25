@@ -1,19 +1,19 @@
 
 import { useState, useEffect } from 'react'
 // import './itemListContainer.css'
-import { Link, useParams } from 'react-router-dom'
+import { Link, Route, Routes, useParams } from 'react-router-dom'
 import Container from 'react-bootstrap/Container';
 import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, updateDoc, where, } from 'firebase/firestore'
 // import FetchCatalog from '../FetchCatalog/FetchCatalog'
 import ItemListDetails from '../ItemListDetails/ItemListDetails'
-import { Button, Card } from 'react-bootstrap'
+import { Button, Card, Nav } from 'react-bootstrap'
 
 // import CatalogImport from '../FetchCatalog/FetchCatalog';
 import { useCatalog } from '../FetchCatalog/FetchUse';
 import BotonCant from '../BotonCant/BotonCant';
 import { ItemListSelected } from '../ItemListSelected/ItemListSelected';
 // import { gFetch } from '../../helpers/gFetch'
-const products = []
+
 
 // const addOrder = () => {
 
@@ -36,8 +36,10 @@ const products = []
 // }
 
 const ItemListContainer = ({ greeting }) => {
-  const {products, error, loading} = useCatalog()
+  // const { franqId } = useParams()
+  const { products, error, loading } = useCatalog()
   console.log(products)
+
 
 
 
@@ -45,7 +47,7 @@ const ItemListContainer = ({ greeting }) => {
   // const [loading, setLoading] = useState(true)
 
 
-  // const { franqId } = useParams()
+
 
   // useEffect(() => {
   //   fetch('./objetos.json')
@@ -92,7 +94,9 @@ const ItemListContainer = ({ greeting }) => {
 
 
 
-
+  const reRender = () => {
+    const { franqId, productId } = useParams()
+  }
 
 
   setTimeout(() => {
@@ -107,7 +111,10 @@ const ItemListContainer = ({ greeting }) => {
 
 
   return (
+
     <section className='itemList'>
+
+
       <label className='label'>{greeting}</label>
       <Container fluid className='row'>
 
@@ -130,7 +137,7 @@ const ItemListContainer = ({ greeting }) => {
                   <br />
                   Stock disponible: {products.stock}
                 </Card.Text>
-                <Link to={`/catalog/${products.franqId}/${products.id}`}><ItemListSelected products={'hola'}/><Button variant="primary">Ver Producto</Button></Link>
+                <Link to={`/catalog/${products.franqId}/${products.id}`}><ItemListSelected products={'hola'} /><Button variant="primary">Ver Producto</Button></Link>
                 {/* <BotonCant products={products}/> */}
               </Card.Body>
             </Card>

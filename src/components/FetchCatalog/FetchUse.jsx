@@ -17,7 +17,8 @@ export const useCatalog = () => {
     const db = getFirestore(InitFirestoreApp)
     const queryCollection = collection(db, 'productos')
 
-    useEffect(() => {
+useEffect(() => {
+
 
 
         if (franqId == null) {

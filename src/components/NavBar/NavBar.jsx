@@ -6,10 +6,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { Link } from "react-router-dom";
+import { useCatalog } from "../FetchCatalog/FetchUse"; 
 
 
 
 export default function NavBar() {
+
     return (
         <Navbar bg="light" expand="lg">
             {/* <div className="linea">
@@ -35,11 +37,11 @@ export default function NavBar() {
                                 </NavDropdown.Item>
                             </NavDropdown>
 
-                            <NavDropdown title="Best Sellers" id="basic-nav-dropdown">
-                                <NavDropdown.Item as={Link} to='/catalog/1'>Shaman King</NavDropdown.Item>
-                                <NavDropdown.Item as={Link} to='/catalog/2'>Tokyo Revengers</NavDropdown.Item>
-                                <NavDropdown.Item  as={Link} to='/catalog/3'>Vinland Saga</NavDropdown.Item>
-                            </NavDropdown>
+                            {/* <NavDropdown title="Best Sellers" id="basic-nav-dropdown">
+                                <Link className="btn" to='/catalog/1'>Shaman King</Link>
+                                <Link className="btn" to='/catalog/2'>Tokyo Revengers</Link>
+                                <Link className="btn" as={Link} to='/catalog/3'>Vinland Saga</Link>
+                            </NavDropdown> */}
                         </Nav>
                     </Navbar.Collapse>
                     <CarritoWidget aria-controls="basic-navbar-nav" />

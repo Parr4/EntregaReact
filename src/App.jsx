@@ -33,12 +33,13 @@ function App() {
       <BrowserRouter>
       <CartContextProvider>
         <NavBar />
-        <CatalogImport/>
+        {/* <CatalogImport/> */}
         <Routes>
           <Route path='/' element={<Title titulo='Shaman Manga Store' subtitulo='Tu tienda de Mangas'  />}/>
           <Route path='/catalog' element= { <ItemListContainer greeting={'Bienvenido a nuestra tienda, aun estamos trabajando en ella, asi que no esperes mucho de ella'} />}/>
           <Route path='/catalog/:franqId' element={<ItemListContainer/>}/>
           <Route path='/cart' element={<CartContainer/>}/>
+          <Route path='/catalog/:franqId/:/*' element={<ItemListDetails/>}/>
           <Route path='/catalog/:franqId/:productId' element={<ItemListDetails/>}/>
           <Route path='*' element=<Navigate to="/"/>/>
         </Routes>

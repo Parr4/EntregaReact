@@ -25,9 +25,9 @@ const ItemListDetails = () => {
     const {  addToCart } = useCartContext()
 
 
-    const onAdd = (cant) => {
-        console.log('la cantidad seleccionada es: ',cant)
-        addToCart( {...products[0], cant } )
+    const onAdd = (count) => {
+        console.log('la cantidad seleccionada es: ',count)
+        addToCart( {...products[0], count } )
         setIsCant(true)
     }
 
