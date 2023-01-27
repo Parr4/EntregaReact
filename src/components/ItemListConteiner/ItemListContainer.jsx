@@ -12,6 +12,8 @@ import { Button, Card, Nav } from 'react-bootstrap'
 import { useCatalog } from '../FetchCatalog/FetchUse';
 import BotonCant from '../BotonCant/BotonCant';
 import { ItemListSelected } from '../ItemListSelected/ItemListSelected';
+import ItemCount from '../ItemCount/ItemCount';
+import { useCartContext } from '../../context/CartContext';
 // import { gFetch } from '../../helpers/gFetch'
 
 
@@ -93,10 +95,12 @@ const ItemListContainer = ({ greeting }) => {
   // }, [franqId])
 
 
-
-  const reRender = () => {
-    const { franqId, productId } = useParams()
-  }
+  const {  addToCart } = useCartContext()
+  const onAdd = (count) => {
+    console.log({products})
+    console.log('la cantidad seleccionada es: ',count)
+    addToCart( {products, count } )
+}
 
 
   setTimeout(() => {
@@ -138,7 +142,8 @@ const ItemListContainer = ({ greeting }) => {
                   Stock disponible: {products.stock}
                 </Card.Text>
                 <Link to={`/catalog/${products.franqId}/${products.id}`}><ItemListSelected products={'hola'} /><Button variant="primary">Ver Producto</Button></Link>
-                {/* <BotonCant products={products}/> */}
+
+
               </Card.Body>
             </Card>
 

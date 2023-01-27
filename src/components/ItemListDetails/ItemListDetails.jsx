@@ -91,7 +91,7 @@ const ItemListDetails = () => {
                     
                         <>
                             <Link to="/cart">
-                                <button className='btn btn-outline-primary'>Ir al carrtio</button>
+                                <button className='btn btn-outline-primary'>Ir al carrito</button>
 
                             </Link>
                             <Link to="/">

@@ -7,12 +7,16 @@ import { useCatalog } from "../FetchCatalog/FetchUse"
 
 
 const CartContainer = () => {
+  const [orderId, setOrderId] = useState(null)
   const [dataForm, setFormData] = useState({
     name: '',
     email: '',
-    phone: '569'
+    phone: '569',
+    // orderid: orderId
+
   })
   const { cartList, clearCart, totalPrice, deleteItem, totalQuant } = useCartContext()
+
   console.log(cartList)
 
 
@@ -28,6 +32,9 @@ const CartContainer = () => {
     order.buyer = dataForm
     order.price = totalPrice()
     order.items = cartList.map(({ franqId, id, precio, franquicia, tomo, editorial, count }) => ({ franqId, id, franquicia, tomo, precio, editorial, count }))
+    order.id = orderId
+    
+
 
     // const {products, error, loading} = useCatalog()
 
@@ -42,11 +49,17 @@ const CartContainer = () => {
     // });
 
     addDoc(queryCollection, order)
-      .then(resp => console.log(resp))
+      // .then(resp => console.log(resp))
+      .then((docRef) => {
+        setOrderId(docRef.id)
+        console.log(docRef)}
+)
+
+    // .then(setOrderId(docRef.id))
       .catch(err => console.log(err))
       .finally(() => clearCart())
 
-
+      
     // update 
     // const queryDoc = doc(db, 'productos', 'LZgs8H5DuqMOdTwQKxRp')
     // updateDoc(queryDoc, {
@@ -80,7 +93,7 @@ const CartContainer = () => {
         <>
           {cartList.map(prod => <div key={`${prod.franqId}.${prod.id}`}>
             <div className="w-50">
-              <img src={prod.foto} alt="" className='w-25' />
+              <img src={`/src/assets/img/${prod.franquicia}/${prod.tomo}.jpg`} alt="" className='w-25' />
 
 
             </div>
@@ -125,6 +138,7 @@ const CartContainer = () => {
                   placeholder="ingrese el email"
                   pattern={`[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,40}$`}
                 /></div>
+                
 
               <button className="btn btn-outline-success" >Terminar Compra</button>
             </form>
