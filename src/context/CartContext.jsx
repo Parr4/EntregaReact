@@ -10,7 +10,7 @@ export const CartContextProvider = ({ children }) => {
     // modificacion del cartlist 
 
     const addToCart = (product) => {
-        console.log("addtocart: ",product)
+        // console.log("addtocart: ",product)
         // comprobar si esta el producto
 
         const idx = cartList.findIndex(prod => `${prod.franqId}.${prod.id}` == `${product.franqId}.${product.id}`)
@@ -42,7 +42,7 @@ export const CartContextProvider = ({ children }) => {
     }
 
     const deleteItem = (franqId ,id) => {
-        console.log(franqId, id)
+        // console.log(franqId, id)
         setCartList( cartList.filter(prod => `${prod.franqId}.${prod.id}` !== `${franqId}.${id}` ) )
     }
     // inInCart

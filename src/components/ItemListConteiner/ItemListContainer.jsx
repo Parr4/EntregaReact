@@ -37,10 +37,10 @@ import { useCartContext } from '../../context/CartContext';
 //   updateDoc(queryDoc)
 // }
 
-const ItemListContainer = ({ greeting }) => {
+const ItemListContainer = () => {
   // const { franqId } = useParams()
   const { products, error, loading } = useCatalog()
-  console.log(products)
+  // console.log(products)
 
 
 
@@ -97,21 +97,21 @@ const ItemListContainer = ({ greeting }) => {
 
   const {  addToCart } = useCartContext()
   const onAdd = (count) => {
-    console.log({products})
-    console.log('la cantidad seleccionada es: ',count)
+    // console.log({products})
+    // console.log('la cantidad seleccionada es: ',count)
     addToCart( {products, count } )
 }
 
 
   setTimeout(() => {
-    console.log(products)
+    // console.log(products)
     // setLoading(false);
   }, "1000")
 
 
 
   // const productos = CatalogImport
-  console.log(products)
+  // console.log(products)
 
 
   return (
@@ -119,7 +119,7 @@ const ItemListContainer = ({ greeting }) => {
     <section className='itemList'>
 
 
-      <label className='label'>{greeting}</label>
+   
       <Container fluid className='row'>
 
         {loading ?

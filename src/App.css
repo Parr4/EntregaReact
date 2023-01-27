@@ -67,9 +67,12 @@ body{
 
 h1{
   text-align: center;
-  padding-top: 50px;
-  padding-bottom:50px ;
+  padding-top: 30px;
+  padding-bottom:30px ;
   width: 100vw;
+  background-color: orange;
+  text-transform: uppercase;
+  color: black;
 }
 
 h2{
@@ -85,10 +88,11 @@ label{
 }
 
 .relleno{
-  padding-top: 700px;
+  padding-top: 200px;
 }
 .itemList{
   margin: 0;
+  margin-top: 20px;
   padding: 0;
   justify-items: center;
   width: 100vw;
@@ -110,3 +114,82 @@ label{
 .card{
   margin: 10px;
 }
+
+.modal-container{
+  position: fixed;
+  background-color: rgba(255, 255, 255, 0.897);
+  border: solid 5px orange;
+  border-radius: 25px;
+  top: 25%;
+  left: 10%;
+  right: 10%;
+  bottom: 50%;
+
+  overflow: auto; /* Enable scroll if needed */
+
+  z-index: 999;
+  text-align: center;
+
+}
+.modal-title{
+  padding: 20px;
+  background-color: orange;
+  color: black;
+}
+
+.modal-body{
+  margin-top: 30px;
+  font-weight: bolder;
+
+}
+
+ul{
+  list-style-type: none
+}
+.logo {
+  width: 50px;
+  display: inline-block;
+
+  /* filter: invert(1); */
+}
+
+
+.rrss {
+  padding: 10px;
+  list-style: none;
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+  margin: auto;
+
+}
+
+.detailHead{
+  font-weight: bolder;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+}
+
+.detailBody{
+
+  padding: 0px 50px 200px 50px;
+}
+.detailPrice{
+  font-weight: bolder;
+  padding: 0px;
+  
+}
+
+.cardBody{
+  background-color: red;
+}
+.prodCart{
+  padding: 20px;
+}
+
+.checkout-container{
+  padding: 40px;
+  justify-content: center;
+}
+
+

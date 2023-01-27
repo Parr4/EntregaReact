@@ -1,37 +1,38 @@
-import {collection, doc, getDoc, getDocs, getFirestore, query, where} from 'firebase/firestore'
+import { collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore'
 import { useEffect } from "react"
 import { useState } from "react"
 import { Link, useParams } from "react-router-dom"
 import { CartContextProvider, useCartContext } from '../../context/CartContext'
 import BotonCant from "../BotonCant/BotonCant"
-import { Cart } from '../Cart/Cart'
+
 import CatalogImport from '../FetchCatalog/FetchCatalog'
 import { useCatalog } from '../FetchCatalog/FetchUse'
 import ItemCount from '../ItemCount/ItemCount'
 import { ItemListSelected } from '../ItemListSelected/ItemListSelected'
+import '../../App.css'
 
 const ItemListDetails = () => {
     // const [product, setProduct] = useState({})
     // const [loading, setLoading] = useState(true)
 
     // const {products} = ItemListSelected()
-    const { products, error, loading} = useCatalog()
-    const { franqId ,productId } = useParams()
-    console.log('Id producto: ', franqId, productId)
+    const { products, error, loading } = useCatalog()
+    const { franqId, productId } = useParams()
+    // console.log('Id producto: ', franqId, productId)
 
 
-    const [isCant, setIsCant ] = useState(false)
+    const [isCant, setIsCant] = useState(false)
 
-    const {  addToCart } = useCartContext()
+    const { addToCart } = useCartContext()
 
 
     const onAdd = (count) => {
-        console.log('la cantidad seleccionada es: ',count)
-        addToCart( {...products[0], count } )
+        // console.log('la cantidad seleccionada es: ', count)
+        addToCart({ ...products[0], count })
         setIsCant(true)
     }
 
- 
+
     // console.log("catalogogog", CatalogImport)
 
 
@@ -52,7 +53,7 @@ const ItemListDetails = () => {
     // useEffect(() =>{
     //     const db = getFirestore()
     //     const queryCollection = collection(db, 'productos')
-    
+
     //     const itemSeleccionado = query(queryCollection, where('franqId', '==', franqId), where('id', '==', productId))
 
     //     getDocs(itemSeleccionado)
@@ -67,49 +68,51 @@ const ItemListDetails = () => {
         // <Link to={`catalog/detail/${products.franqId}/${products.id}`}>
         <section>
             {loading ?
-          <h2>Cargando Productos!</h2>
-          :
-          products.map(products => <section
-            style={{ justifyContent: 'center' }}
-            className='col-lg-6 col-md-4 col-sm-6 col-6'
-            key={`${products.id} + . + ${products.franqId}`}
-          >
-            <div className="card w-100 mt-5" />
-                <div className="card-header">
-                    {`${products.franquicia} ${products.tomo} / ${products.editorial}`}
-                </div>
-                <div className="card-body">
-                    <img src={`/src/assets/img/${products.franquicia}/${products.tomo}.jpg`} alt='' className='w-50' />
-                    {products.precio}
-                    <p>Stock disponible: {products.stock}</p>
-                </div>
-                <div className="card-footer">
-                    {/* <BotonCant products={products}/> */}
-                </div>
-                <div className="col">
-                    {isCant ?
+                <h2>Cargando Productos!</h2>
+                :
+                products.map(products => <section
+                    style={{ justifyContent: 'center' }}
+                    className='col-lg-6 col-md-4 col-sm-6 col-6'
+                    key={`${products.id} + . + ${products.franqId}`}
+                >
                     
-                        <>
-                            <Link to="/cart">
-                                <button className='btn btn-outline-primary'>Ir al carrito</button>
+                    <div className='detailBody'>
+                    <div className="detailHead">
+                        <p >{`${products.franquicia} ${products.tomo} / ${products.editorial}`}</p>
+                    </div>
+                        
+                            <img src={`/src/assets/img/${products.franquicia}/${products.tomo}.jpg`} alt='' className='w-50' />
+                            <p className='detailPrice'>Valor: ${products.precio}</p>
+                            <p className='detailPrice'>Stock disponible: {products.stock}</p>
+                        
+                        <div className="card-footer">
+                            {/* <BotonCant products={products}/> */}
+                        </div>
+                        <div className="col">
+                            {isCant ?
 
-                            </Link>
-                            <Link to="/">
-                                <button className='btn btn-outline-success'>Seguir comprando </button>
-                            </Link>
-                        </>
-                    
-                    :
-                        <ItemCount 
-                            stock={products.stock} 
-                            initial={1} 
-                            onAdd={onAdd} 
+                                <>
+                                    <Link to="/cart">
+                                        <button className='btn btn-outline-primary'>Ir al carrito</button>
 
-                        />
-                    
-                    }
+                                    </Link>
+                                    <Link to="/catalog">
+                                        <button className='btn btn-outline-success'>Seguir comprando </button>
+                                    </Link>
+                                </>
 
-                </div>
+                                :
+                                <ItemCount
+                                    stock={products.stock}
+                                    initial={1}
+                                    onAdd={onAdd}
+
+                                />
+
+                            }
+
+                        </div>
+                    </div>
 
 
                 </section>)

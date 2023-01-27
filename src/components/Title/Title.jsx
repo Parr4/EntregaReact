@@ -14,11 +14,10 @@ import ComClass from "../../assets/ComponentesClase/ComClass"
 
 
  function Title({titulo, subtitulo}){
-  console.log(`${titulo} ${subtitulo}`)
+  // console.log(`${titulo} ${subtitulo}`)
   return(
     <div>
       <h1>{ titulo }</h1>
-      <h2>{ subtitulo }</h2>
 
       <ComClass/>
 

@@ -42,7 +42,7 @@ const BotonCant = ({ products }) => {
     // <CarritoWidget cantidad={cantidad}/>
 
 
-    console.log('Estai viendo esta wea', products, products.stock)
+    // console.log('Estai viendo esta wea', products, products.stock)
     return (
         <div>
             {/* <div className=" btn btn-warning">

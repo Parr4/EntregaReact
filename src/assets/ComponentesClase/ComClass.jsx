@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+
+
 export default function ComClass() {
     return (
       <div id="carouselExampleCaptions" className="carousel slide" data-bs-ride="false">
@@ -44,6 +46,7 @@ export default function ComClass() {
         <span className="carousel-control-next-icon" aria-hidden="true"></span>
         <span className="visually-hidden">Next</span>
       </button>
+      {/* <div className='relleno'></div> */}
     </div>
     )
 }

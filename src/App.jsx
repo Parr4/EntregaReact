@@ -11,7 +11,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import ItemListDetails from './components/ItemListDetails/ItemListDetails'
 import ComClass from './assets/ComponentesClase/ComClass'
 import CatalogImport from './components/FetchCatalog/FetchCatalog'
-import { Cart } from './components/Cart/Cart'
 import CartContainer from './components/CartContainer/CartContainer'
 import { CartContextProvider } from './context/CartContext'
 
@@ -36,7 +35,7 @@ function App() {
         {/* <CatalogImport/> */}
         <Routes>
           <Route path='/' element={<Title titulo='Shaman Manga Store' subtitulo='Tu tienda de Mangas'  />}/>
-          <Route path='/catalog' element= { <ItemListContainer greeting={'Bienvenido a nuestra tienda, aun estamos trabajando en ella, asi que no esperes mucho de ella'} />}/>
+          <Route path='/catalog' element= { <ItemListContainer  />}/>
           <Route path='/catalog/:franqId' element={<ItemListContainer/>}/>
           <Route path='/cart' element={<CartContainer/>}/>
           {/* <Route path='/catalog/:franqId/:/*' element={<ItemListDetails/>}/> */}

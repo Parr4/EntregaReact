@@ -1,23 +1,25 @@
 import { addDoc, collection, doc, getFirestore, updateDoc } from "firebase/firestore"
 import { useState } from "react"
+import Modal from "../Modal/Modal";
 import { Link } from "react-router-dom"
 import { useCartContext } from "../../context/CartContext"
 import { useCatalog } from "../FetchCatalog/FetchUse"
+import OrderForm from "./OrderForm"
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 
 
 const CartContainer = () => {
-  const [orderId, setOrderId] = useState(null)
-  const [dataForm, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '569',
-    // orderid: orderId
-
-  })
+  const [orderId, setOrderId] = useState(null);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [showModal, setShowModal] = useState(false);
   const { cartList, clearCart, totalPrice, deleteItem, totalQuant } = useCartContext()
 
-  console.log(cartList)
+  // console.log(cartList)
 
 
   // Descripción de la actividad
@@ -28,12 +30,19 @@ const CartContainer = () => {
   const addOrder = (e) => {
     e.preventDefault()
     // armar la orden de un formulario
-    const order = {}
-    order.buyer = dataForm
-    order.price = totalPrice()
-    order.items = cartList.map(({ franqId, id, precio, franquicia, tomo, editorial, count }) => ({ franqId, id, franquicia, tomo, precio, editorial, count }))
-    order.id = orderId
-    
+
+    const order = {};
+    order.buyer = { name, email, phone };
+    order.total = totalPrice();
+    order.items = cartList.map(CartItem => {
+
+      const id = `${CartItem.franqId}.${CartItem.id}`;
+      const nombre = `${CartItem.franquicia} ${CartItem.editorial} ${CartItem.tomo}`;
+      const precio = CartItem.precio;
+      const cantidad = CartItem.count;
+      return { id, nombre, precio, cantidad };
+    })
+
 
 
     // const {products, error, loading} = useCatalog()
@@ -43,39 +52,34 @@ const CartContainer = () => {
     const queryCollection = collection(db, 'orders')
 
     // muchas ordenes 
-
-    // productos.forEach(async prod => {
-    //   await addDoc()
-    // });
-
     addDoc(queryCollection, order)
-      // .then(resp => console.log(resp))
       .then((docRef) => {
-        setOrderId(docRef.id)
-        console.log(docRef)}
-)
+        setOrderId(docRef.id);
+        setShowModal(true)
+        // setShowModal(true)
+      })
 
-    // .then(setOrderId(docRef.id))
-      .catch(err => console.log(err))
-      .finally(() => clearCart())
-
-      
-    // update 
-    // const queryDoc = doc(db, 'productos', 'LZgs8H5DuqMOdTwQKxRp')
-    // updateDoc(queryDoc, {
-    //   stock: 100
-    // })
-
-    // borrado lógico
-    // const queryDoc = doc(db, 'productos', 'LZgs8H5DuqMOdTwQKxRp')
-    // updateDoc(queryDoc, {
-    //   isActive: false
-    // })
+      .catch(err => console.log('ERROR AL GENERAL LA ORDEN', err))
+    // .finally(() => clearCart())
 
 
 
-    console.log('se actualizo')
+    // console.log('se actualizo')
   }
+  // update 
+  // const queryDoc = doc(db, 'productos', 'LZgs8H5DuqMOdTwQKxRp')
+  // updateDoc(queryDoc, {
+  //   stock: 100
+  // })
+
+  // borrado lógico
+  // const queryDoc = doc(db, 'productos', 'LZgs8H5DuqMOdTwQKxRp')
+  // updateDoc(queryDoc, {
+  //   isActive: false
+  // })
+
+
+
 
   const handleOnChange = (e) => {
     // console.log('npmbre del input: ',e.target.name)
@@ -85,66 +89,65 @@ const CartContainer = () => {
       [e.target.name]: e.target.value
     })
   }
-  console.log(dataForm)
-  console.log("Carlist: ", cartList)
+  // console.log(dataForm)
+  // console.log("Carlist: ", cartList)
+
+
+
+  const notValid = !(name.length && email.length && phone.length > 0);
+
+
   return (
     <div>
       {cartList.length !== 0 ?
         <>
           {cartList.map(prod => <div key={`${prod.franqId}.${prod.id}`}>
-            <div className="w-50">
-              <img src={`/src/assets/img/${prod.franquicia}/${prod.tomo}.jpg`} alt="" className='w-25' />
+            <div >
+              <div className="row prodCart">
+                <img src={`/src/assets/img/${prod.franquicia}/${prod.tomo}.jpg`} alt="" className="col-1" />
+                <div className="col-5 prodCart">
+                  <p> Producto: {prod.franquicia} {prod.tomo}</p>
+                  <p>Editorial: {prod.editorial} </p>
+                  <p>Precio Unitario: ${prod.precio}</p>
+                  <p>Cantidad: {prod.count} (${`${prod.count * prod.precio}`} / total)</p>
 
+                </div>
+
+                <button className="col-1 btn btn-danger" onClick={() => deleteItem(prod.franqId, prod.id)}> X </button>
+              </div>
 
             </div>
-            Nombre: {prod.franqId} {prod.franquicia} {prod.tomo} - {prod.editorial}- precio: ${prod.precio} - Cantidad: {prod.count}
-            <button onClick={() => deleteItem(prod.franqId, prod.id)} className="btn btn-danger"> X </button>
+
+
           </div>
           )
           }
-          <h4>Llevas {totalQuant()} articulos por un total de ${totalPrice()}   </h4>
-
-          <div className="formularioCompra">
-            <form onSubmit={addOrder} >
-              <div className="input name">
-                Nombre
-                <input
-                  type="text"
-                  onChange={handleOnChange}
-                  name='name'
-                  value={dataForm.name}
-                  placeholder="Nombre Completo"
-                  pattern={`[a-zA-Z ]{4,40}$`}
-                /></div>
-              <div className="input phone">
-                Numero de contacto
-                <input
-                  type="text"
-                  onChange={handleOnChange}
-                  name='phone'
-                  value={dataForm.phone}
-                  placeholder="56912345678 "
-                  size={11}
-                  maxLength={11}
-                  pattern={`[0-9]{11,11}$`}
-                /></div>
-              <div className="input mail">
-                E-mail
-                <input
-                  type="text"
-                  onChange={handleOnChange}
-                  name='email'
-                  value={dataForm.email}
-                  placeholder="ingrese el email"
-                  pattern={`[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+[.]{1}[a-zA-Z]{2,40}$`}
-                /></div>
-                
-
-              <button className="btn btn-outline-success" >Terminar Compra</button>
-            </form>
+          <div className="container">
+            <h4>Llevas {totalQuant()} articulos por un total de ${totalPrice()}   </h4>
           </div>
 
-          <button className="btn btn-danger" onClick={clearCart} >Vaciar carrito</button>
+
+          <div className="checkout-container">
+            <h2 className="checkout-title">Rellena tus datos</h2>
+            <p className="checkout-p">Esto nos permitirá confirmar la compra</p>
+
+            <OrderForm
+              createOrder={addOrder}
+              name={name}
+              setName={setName}
+              email={email}
+              setEmail={setEmail}
+              notValid={notValid}
+              phone={phone}
+              setPhone={setPhone}
+              setShowModal={setShowModal} />
+
+            {showModal && <Modal
+              showModal={showModal}
+              setShowModal={setShowModal}
+              orderId={orderId} />}
+          </div>
+
 
 
 

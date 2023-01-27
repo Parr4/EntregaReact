@@ -21,7 +21,7 @@ const queryCollection = collection(db, 'productos')
 // }
 
 
-console.log("Query: ", queryCollection)
+// console.log("Query: ", queryCollection)
 
 const GetCatalogProducts = getDocs(queryCollection)
 const filtredList = query(queryCollection, where('franqId', '==', franqId))

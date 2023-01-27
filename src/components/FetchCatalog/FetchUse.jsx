@@ -38,7 +38,7 @@ useEffect(() => {
             if (productId == null){
 
             const filtredList = query(queryCollection, where('franqId', '==', franqId))
-            console.log("filtrado", getDocs(filtredList))
+            // console.log("filtrado", getDocs(filtredList))
 
             getDocs(filtredList)
 
