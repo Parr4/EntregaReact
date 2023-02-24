@@ -13,7 +13,7 @@ export default function Footer() {
                     <div className="col col-md-6">
                         <h3 className="rrss">REDES SOCIALES</h3>
                         <ul className="rrss row">
-                            <li className='col'><a href="https://www.Instagram.com"><img className="logo" src="../img/ig-logo.png" alt="Instagram"/></a></li>
+                            <li className='col'><a href="https://www.Instagram.com"><img className="logo" src="img/ig-logo.png" alt="Instagram"/></a></li>
                             <li className='col'><a href="https://facebook.com"><img className="logo" src="../img/fb-logo.png" alt="Facebook"/></a></li>
                             <li className='col'><a href="https://facebook.com"><img className="logo" src="../img/wsp-logo.png" alt="Whatsapp"/></a></li>
                         </ul>
